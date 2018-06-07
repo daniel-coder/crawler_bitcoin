@@ -1,0 +1,6 @@
+﻿----------ChromeDriver v2.39 (2018-05-30)----------
+Supports Chrome v66-68
+
+webdriver下载地址:
+http://npm.taobao.org/
+https://chromedriver.storage.googleapis.com/

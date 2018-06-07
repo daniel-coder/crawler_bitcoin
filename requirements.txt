@@ -1,0 +1,10 @@
+ujson
+cchardet
+urllib3
+requests
+lxml
+scrapy
+selenium
+pymysql
+python-dateutil
+pywin32
