@@ -7,4 +7,3 @@ scrapy
 selenium
 pymysql
 python-dateutil
-pywin32

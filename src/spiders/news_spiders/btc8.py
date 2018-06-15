@@ -36,6 +36,8 @@ class Btc8Spider(NoticeChangeSpider):
         main_div = response.xpath("//div[@id='zan-bodyer']")
         item = NewsItem()
         item["title"] = main_div.xpath(".//div[@class='article-title']/h1/text()").extract_first("")
+        item["read_count"] = int(main_div.xpath(".//div[@class='single-crumbs clearfix']/span[@class='pull-right fa-eye-span']/i/following::text()").extract_first("").strip())
+        item["pic"] = main_div.xpath(".//img/@src").extract_first("")
         item["time"] = parse(main_div.xpath(".//time/@datetime").extract_first(""))
         item["content"] = main_div.xpath(".//div[@class='article-content']").extract_first("")
         item["url"] = response.url

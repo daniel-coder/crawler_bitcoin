@@ -13,9 +13,9 @@ SCRAPY_LOG_LEVEL = "ERROR"
 DATA_STORAGE_MYSQL_SETTINGS = {
     'local': {
         'db': 'test',
-        'user': 'test',
+        'user': 'root',
         'passwd': '123456',
-        'host': 'localhost',
+        'host': '39.105.128.88',
         'port': 3306,
         # 'unix_socket': "MySQL",
         # 'named_pipe': True,

@@ -8,8 +8,8 @@ sys_path.append(os_path.dirname(os_path.dirname(os_path.dirname(os_path.abspath(
 from src.run.utils import run_scrapy_spider
 
 if __name__ == '__main__':
-    from src.spiders.news_spiders.btc8 import Btc8Spider
-    from src.spiders.news_spiders.bitkan import BitkanSpider
-
-    run_scrapy_spider([BitkanSpider,
+    # from src.spiders.news_spiders.btc8 import Btc8Spider
+    # from src.spiders.news_spiders.bitkan import BitkanSpider
+    from src.spiders.news_spiders.bishijie import BishijieSpider
+    run_scrapy_spider([BishijieSpider
                       ])

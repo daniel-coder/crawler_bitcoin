@@ -86,6 +86,7 @@ DOWNLOAD_HANDLERS = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'src.pipelines.news_pipelines.NewsPipeline': 100,
+    'src.pipelines.message_pipelines.MessagePipeline': 101,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

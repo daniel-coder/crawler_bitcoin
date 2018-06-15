@@ -39,6 +39,7 @@ class BitkanSpider(NoticeChangeSpider):
         main_div = response.xpath("//div[@class='news-v3-in']")
         item = NewsItem()
         item["title"] = main_div.xpath(".//h2/text()").extract_first("")
+        item["pic"] = main_div.xpath(".//img/@src").extract_first("")
         item["time"] = parse(main_div.xpath(".//li[last()]/text()").extract_first(""))
         item["content"] = main_div.xpath(".//div[last()]").extract_first("")
         item["url"] = response.url
