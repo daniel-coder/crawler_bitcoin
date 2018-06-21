@@ -4,16 +4,16 @@ from dateutil.parser import parse
 from scrapy import Request
 
 from src.items.news_items import NewsItem
-from src.spiders.spider_classes import NoticeChangeSpider
+from src.spiders.spider_classes import NoticeChangeSpider, NoticeClosedSpider
 
 
-class Btc8Spider(NoticeChangeSpider):
+class Btc8Spider(NoticeChangeSpider, NoticeClosedSpider):
     name = "8btc"
     allowed_domains = ["8btc.com"]
     start_urls = ["http://www.8btc.com/cypherpunk"]
 
     custom_settings = {
-        'DOWNLOAD_DELAY': 1,
+        'DOWNLOAD_DELAY': 100,
         'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
     }
 
@@ -31,6 +31,8 @@ class Btc8Spider(NoticeChangeSpider):
         url = response.xpath("//div[@id='zan-page']//a[text()='»']/@href").extract_first()
         if url:
             yield Request(url, self.parse, dont_filter=True)
+        else:  # 没有下一页时，重头从第一页开始
+            yield Request(self.start_urls[0], self.parse, dont_filter=True)
 
     def parse_news(self, response):
         main_div = response.xpath("//div[@id='zan-bodyer']")

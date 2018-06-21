@@ -5,16 +5,16 @@ from dateutil.parser import parse
 from scrapy import Request, FormRequest
 
 from src.items.news_items import NewsItem
-from src.spiders.spider_classes import NoticeChangeSpider
+from src.spiders.spider_classes import NoticeChangeSpider, NoticeClosedSpider
 
 
-class BitkanSpider(NoticeChangeSpider):
+class BitkanSpider(NoticeChangeSpider, NoticeClosedSpider):
     name = "bitkan"
     allowed_domains = ["bitkan.com"]
     start_urls = ["http://bitkan.com/news"]
 
     custom_settings = {
-        'DOWNLOAD_DELAY': 1,
+        'DOWNLOAD_DELAY': 100,
         'CONCURRENT_REQUESTS_PER_DOMAIN': 1,
     }
 
@@ -34,6 +34,8 @@ class BitkanSpider(NoticeChangeSpider):
             page = self.PAGE_PATTEN.search(onclick).group(1)
             url = "http://bitkan.com/news/load_news/" + page
             yield FormRequest(url, self.parse, formdata={"page": page}, dont_filter=True)
+        else:  # 没有下一页时，重头从第一页开始
+            yield Request(self.start_urls[0], self.parse, dont_filter=True)
 
     def parse_news(self, response):
         main_div = response.xpath("//div[@class='news-v3-in']")
